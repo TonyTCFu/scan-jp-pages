@@ -8,12 +8,12 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="掃描日文">
-  <meta name="description" content="拍照辨識中文或日文，譯成日文並顯示念法與朗讀">
+  <meta name="description" content="拍照辨識日文或中文，譯成通順對應語言，並顯示假名、英文讀音與朗讀">
   <title>掃描日文翻譯念法</title>
   <link rel="manifest" href="./manifest.webmanifest">
   <link rel="apple-touch-icon" href="./apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
-  <link rel="stylesheet" href="./styles.css?v=3">
+  <link rel="stylesheet" href="./styles.css?v=4">
 </head>
 <body>
   <div id="app">
@@ -21,36 +21,59 @@
       <h1>掃描日文翻譯念法</h1>
       <p id="installHint" hidden>Safari 分享 → 加入主畫面</p>
     </header>
+
     <section class="home-card" id="homeCard">
-      <p class="lead">對準菜單、招牌或說明，立刻辨識並譯成日文。</p>
+      <p class="lead">對準包裝、菜單或招牌。日文譯成通順中文，中文譯成正確日文。都會顯示假名、英文讀音，並可朗讀。</p>
       <label class="btn btn-primary" for="captureInput">拍照</label>
       <label class="btn btn-secondary" for="albumInput">相簿</label>
       <p class="hint">拍照會開啟 iPhone 原生相機。相簿可選已拍的照片。第一次辨識需下載字庫，請稍候。</p>
     </section>
+
     <input id="captureInput" class="visually-hidden" type="file" accept="image/*" capture="environment">
     <input id="albumInput" class="visually-hidden" type="file" accept="image/*">
     <canvas id="frame" hidden></canvas>
+
     <div id="status" class="status" hidden>
       <div class="spinner" aria-hidden="true"></div>
       <p id="statusText">處理中…</p>
     </div>
     <p id="errorBox" class="error" hidden></p>
+
     <section id="results" hidden>
       <img id="preview" alt="本次照片">
-      <article><h2>辨識原文</h2><p id="ocrText" class="body-text"></p></article>
-      <article><h2 id="transHeading">日文翻譯</h2><p id="jpText" class="body-text"></p></article>
-      <article>
-        <h2>念法</h2>
-        <div id="furigana" class="body-text ruby-wrap"></div>
-        <p id="romaji" class="romaji"></p>
-        <button type="button" id="speakBtn" class="btn btn-speak">朗讀</button>
+
+      <article class="trans-card">
+        <div class="card-head">
+          <h2 id="transHeading">翻譯</h2>
+          <button type="button" id="speakBtn" class="btn btn-speak">朗讀日文</button>
+        </div>
+        <p id="jpText" class="body-text"></p>
       </article>
+
+      <article class="reading-card">
+        <h2>日文念法</h2>
+        <p class="reading-label">假名</p>
+        <div id="furigana" class="body-text ruby-wrap"></div>
+        <p class="reading-label">英文讀音</p>
+        <p id="romaji" class="romaji"></p>
+      </article>
+
+      <details id="ocrDetails">
+        <summary>辨識原文（可展開）</summary>
+        <p id="ocrText" class="body-text"></p>
+      </details>
+
       <div class="again-row">
         <label class="btn btn-primary" for="captureInput">再拍</label>
         <label class="btn btn-secondary" for="albumInput">相簿</label>
       </div>
     </section>
   </div>
-  <script src="./app.js?v=3" defer></script>
+
+  <div id="speakBar" class="speak-bar" hidden>
+    <button type="button" id="speakBarBtn" class="btn btn-speak">朗讀日文</button>
+  </div>
+
+  <script src="./app.js?v=4" defer></script>
 </body>
 </html>
