@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f6f1e8">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="掃描日文">
+  <meta name="description" content="拍照辨識中文或日文，譯成日文並顯示念法與朗讀">
+  <title>掃描日文翻譯念法</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="apple-touch-icon" href="./apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
+  <link rel="stylesheet" href="./styles.css?v=3">
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <h1>掃描日文翻譯念法</h1>
+      <p id="installHint" hidden>Safari 分享 → 加入主畫面</p>
+    </header>
+    <section class="home-card" id="homeCard">
+      <p class="lead">對準菜單、招牌或說明，立刻辨識並譯成日文。</p>
+      <label class="btn btn-primary" for="captureInput">拍照</label>
+      <label class="btn btn-secondary" for="albumInput">相簿</label>
+      <p class="hint">拍照會開啟 iPhone 原生相機。相簿可選已拍的照片。第一次辨識需下載字庫，請稍候。</p>
+    </section>
+    <input id="captureInput" class="visually-hidden" type="file" accept="image/*" capture="environment">
+    <input id="albumInput" class="visually-hidden" type="file" accept="image/*">
+    <canvas id="frame" hidden></canvas>
+    <div id="status" class="status" hidden>
+      <div class="spinner" aria-hidden="true"></div>
+      <p id="statusText">處理中…</p>
+    </div>
+    <p id="errorBox" class="error" hidden></p>
+    <section id="results" hidden>
+      <img id="preview" alt="本次照片">
+      <article><h2>辨識原文</h2><p id="ocrText" class="body-text"></p></article>
+      <article><h2 id="transHeading">日文翻譯</h2><p id="jpText" class="body-text"></p></article>
+      <article>
+        <h2>念法</h2>
+        <div id="furigana" class="body-text ruby-wrap"></div>
+        <p id="romaji" class="romaji"></p>
+        <button type="button" id="speakBtn" class="btn btn-speak">朗讀</button>
+      </article>
+      <div class="again-row">
+        <label class="btn btn-primary" for="captureInput">再拍</label>
+        <label class="btn btn-secondary" for="albumInput">相簿</label>
+      </div>
+    </section>
+  </div>
+  <script src="./app.js?v=3" defer></script>
+</body>
+</html>
