@@ -27,7 +27,7 @@ html, body {
   padding:
     calc(16px + env(safe-area-inset-top, 0px))
     16px
-    calc(28px + env(safe-area-inset-bottom, 0px));
+    calc(108px + env(safe-area-inset-bottom, 0px));
 }
 
 .topbar h1 {
@@ -98,13 +98,34 @@ html, body {
 
 .btn-speak {
   width: auto;
-  min-width: 120px;
-  min-height: 48px;
-  margin-top: 12px;
-  padding: 0 18px;
-  font-size: 17px;
+  min-width: 112px;
+  min-height: 44px;
+  margin-top: 0;
+  padding: 0 16px;
+  font-size: 16px;
   background: var(--ok);
   color: #fff;
+  flex: 0 0 auto;
+}
+
+.speak-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 30;
+  display: flex;
+  justify-content: center;
+  padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
+  background: linear-gradient(180deg, rgba(246, 241, 232, 0) 0%, var(--bg) 36%);
+}
+
+.speak-bar[hidden] { display: none !important; }
+
+.speak-bar .btn-speak {
+  width: min(488px, 100%);
+  min-height: 52px;
+  font-size: 18px;
 }
 
 .again-row {
@@ -185,7 +206,7 @@ html, body {
 #preview {
   display: block;
   width: 100%;
-  max-height: 220px;
+  max-height: 140px;
   object-fit: cover;
   border-radius: 14px;
   margin-bottom: 14px;
@@ -194,12 +215,21 @@ html, body {
 
 #results article { margin-bottom: 16px; }
 
-#results h2 {
-  margin: 0 0 6px;
+#results h2,
+.card-head h2 {
+  margin: 0;
   font-size: 12px;
   font-weight: 750;
   letter-spacing: 0.1em;
   color: var(--muted);
+}
+
+.card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
 }
 
 .body-text {
@@ -213,9 +243,42 @@ html, body {
 .ruby-wrap ruby { ruby-position: over; }
 .ruby-wrap rt { font-size: 0.55em; color: #7a6b60; }
 
+.reading-label {
+  margin: 10px 0 2px;
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
 .romaji {
-  margin: 8px 0 0;
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text);
+  word-break: break-word;
+}
+
+#ocrDetails {
+  margin: 4px 0 16px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #fff;
+}
+
+#ocrDetails summary {
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 750;
+  color: var(--muted);
+  list-style: none;
+}
+
+#ocrDetails summary::-webkit-details-marker { display: none; }
+
+#ocrDetails .body-text {
+  margin-top: 8px;
   font-size: 15px;
-  line-height: 1.55;
   color: var(--muted);
 }
