@@ -1,4 +1,4 @@
-const CACHE = "scan-jp-v3";
+const CACHE = "scan-jp-v4";
 const ASSETS = [
   "./",
   "./index.html",
